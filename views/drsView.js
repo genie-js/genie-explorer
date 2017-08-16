@@ -1,10 +1,14 @@
 const html = require('choo/html')
 const css = require('sheetify')
+const prettyBytes = require('prettier-bytes')
 const viewer = require('./fileView')
 
 css('tachyons-flexbox')
 css('tachyons-spacing')
 css('tachyons-lists')
+css('tachyons-font-family')
+css('tachyons-skins')
+css('tachyons-floats')
 
 const prefix = css`
   :host > .file-list {
@@ -35,8 +39,9 @@ module.exports = function drsView (state, emit) {
 
 function FileView (file, emit) {
   return html`
-    <li onclick=${onclick}>
+    <li onclick=${onclick} class="code">
       ${file.id}.${file.type}
+      <span class="mid-gray fr">${prettyBytes(file.size)}</span>
     </li>
   `
 
