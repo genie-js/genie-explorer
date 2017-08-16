@@ -1,0 +1,34 @@
+{
+  "name": "genie-explorer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/goto-bus-stop/genie-explorer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/goto-bus-stop/genie-explorer/issues"
+  },
+  "homepage": "https://github.com/goto-bus-stop/genie-explorer#readme",
+  "devDependencies": {
+    "browserify": "^14.4.0",
+    "budo": "^10.0.4"
+  },
+  "dependencies": {
+    "choo": "^6.0.0",
+    "choo-expose": "^1.3.1",
+    "choo-log": "^7.2.1",
+    "frequency-viewer": "^0.1.0",
+    "genie-drs": "^3.0.0",
+    "genie-slp": "^1.0.0",
+    "jascpal": "^0.1.4",
+    "nanocomponent": "^6.1.0"
+  }
+}
