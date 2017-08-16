@@ -2,6 +2,7 @@ const DRS = require('genie-drs')
 const Palette = require('jascpal')
 const SLP = require('genie-slp')
 const Swatch = require('./components/swatch')
+const RmsScript = require('./components/rmsScript')
 
 module.exports = (state, emitter) => {
   state.drs = null
@@ -28,10 +29,15 @@ module.exports = (state, emitter) => {
       if (state.viewing !== file) return
 
       state.fileBuffer = buffer
-      if (file.type === 'bina' && buffer.toString('ascii', 0, 8) === 'JASC-PAL') {
-        state.fileType = 'palette'
-        state.fileData = Palette(buffer)
-        state.swatch = new Swatch()
+      if (file.type === 'bina') {
+        if (isPalette(buffer)) {
+          state.fileType = 'palette'
+          state.fileData = Palette(buffer)
+          state.swatch = new Swatch()
+        } else if (isRandomMapScript(buffer)) {
+          state.fileType = 'rms'
+          state.scriptRenderer = new RmsScript()
+        }
       } else if (file.type === 'slp ') {
         state.fileType = 'slp'
         state.fileData = SLP(buffer)
@@ -46,4 +52,18 @@ module.exports = (state, emitter) => {
 
     emitter.emit('render')
   })
+}
+
+function isPalette (buffer) {
+  return buffer.toString('ascii', 0, 8) === 'JASC-PAL'
+}
+
+function isRandomMapScript (buffer) {
+  if (buffer.indexOf('<TERRAIN_GENERATION>') !== -1) {
+    return true
+  }
+  if (buffer.indexOf('#const ') !== -1) {
+    return true
+  }
+  return
 }
