@@ -18,23 +18,27 @@ module.exports = (state, emitter) => {
   emitter.on('view', (id) => {
     const file = state.drs.getFile(id)
     state.viewing = file
+    // Reset
+    state.fileBuffer = null
+    state.fileType = null
+    state.fileData = null
+    state.swatch = null
 
     state.drs.readFile(id, (err, buffer) => {
       if (state.viewing !== file) return
 
       state.fileBuffer = buffer
-      state.fileType = null
-      state.fileData = null
-      state.swatch = null
       if (file.type === 'bina' && buffer.toString('ascii', 0, 8) === 'JASC-PAL') {
         state.fileType = 'palette'
         state.fileData = Palette(buffer)
         state.swatch = new Swatch()
-      } else if (file.type === 'slp') {
+      } else if (file.type === 'slp ') {
         state.fileType = 'slp'
         state.fileData = SLP(buffer)
-      } else if (file.type === 'wav') {
+      } else if (file.type === 'wav ') {
         state.fileType = 'wav'
+        const blob = new Blob([ buffer.buffer ], { type: 'audio/wav' })
+        state.fileData = URL.createObjectURL(blob)
       }
 
       emitter.emit('render')
