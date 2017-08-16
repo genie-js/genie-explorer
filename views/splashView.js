@@ -1,9 +1,4 @@
 const html = require('choo/html')
-const css = require('sheetify')
-
-css('tachyons-flexbox')
-css('tachyons-widths')
-css('tachyons-heights')
 
 module.exports = function splashView (state, emit) {
   return html`

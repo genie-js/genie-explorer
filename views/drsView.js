@@ -3,12 +3,6 @@ const css = require('sheetify')
 const prettyBytes = require('prettier-bytes')
 const viewer = require('./fileView')
 
-css('tachyons-spacing')
-css('tachyons-lists')
-css('tachyons-font-family')
-css('tachyons-skins')
-css('tachyons-floats')
-
 const prefix = css`
   :host > .file-list {
     overflow-y: auto;

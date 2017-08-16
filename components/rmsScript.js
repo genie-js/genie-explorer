@@ -1,15 +1,11 @@
 const html = require('choo/html')
 const Nanocomponent = require('nanocomponent')
-const css = require('sheetify')
 const hljs = require('highlight.js/lib/highlight')
 hljs.registerLanguage('aoe-rms', require('../hljs-aoe-rms'))
 
 function highlight (src) {
   return hljs.highlight('aoe-rms', src).value
 }
-
-css('highlight.js/styles/agate.css')
-css('tachyons-spacing')
 
 module.exports = class RMSScript extends Nanocomponent {
   createElement (source) {

@@ -1,6 +1,5 @@
 const html = require('choo/html')
 const Nanocomponent = require('nanocomponent')
-const css = require('sheetify')
 const hljs = require('highlight.js/lib/highlight')
 // Using `lisp` for now because its syntax is similar
 hljs.registerLanguage('aoe-ai', require('highlight.js/lib/languages/lisp'))
@@ -8,9 +7,6 @@ hljs.registerLanguage('aoe-ai', require('highlight.js/lib/languages/lisp'))
 function highlight (src) {
   return hljs.highlight('aoe-ai', src).value
 }
-
-css('highlight.js/styles/agate.css')
-css('tachyons-spacing')
 
 module.exports = class AIScript extends Nanocomponent {
   createElement (source) {

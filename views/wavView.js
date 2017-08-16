@@ -1,7 +1,4 @@
 const html = require('choo/html')
-const css = require('sheetify')
-
-css('tachyons-flexbox')
 
 module.exports = function wavView (state, emit) {
   return html`
