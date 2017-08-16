@@ -1,4 +1,5 @@
 const html = require('choo/html')
+const css = require('sheetify')
 const app = require('choo')()
 const expose = require('choo-expose')
 const log = require('choo-log')
@@ -6,6 +7,8 @@ const DRS = require('genie-drs')
 const splashView = require('./views/splashView')
 const drsView = require('./views/drsView')
 const store = require('./store')
+
+css('tachyons-spacing')
 
 app.use(expose())
 app.use(log())
@@ -22,7 +25,7 @@ function mainView (state, emit) {
   }
 
   return html`
-    <body>
+    <body class="ma0">
       ${view}
     </body>
   `

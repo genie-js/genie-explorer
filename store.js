@@ -23,6 +23,9 @@ module.exports = (state, emitter) => {
       if (state.viewing !== file) return
 
       state.fileBuffer = buffer
+      state.fileType = null
+      state.fileData = null
+      state.swatch = null
       if (file.type === 'bina' && buffer.toString('ascii', 0, 8) === 'JASC-PAL') {
         state.fileType = 'palette'
         state.fileData = Palette(buffer)
