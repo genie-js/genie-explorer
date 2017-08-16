@@ -36,6 +36,7 @@
     "jascpal": "^0.1.4",
     "nanocomponent": "^6.1.0",
     "sheetify": "^6.1.1",
+    "tachyons-box-sizing": "^3.2.1",
     "tachyons-flexbox": "^2.0.5",
     "tachyons-heights": "^6.1.3",
     "tachyons-lists": "^2.0.12",

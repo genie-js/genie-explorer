@@ -9,6 +9,7 @@ const drsView = require('./views/drsView')
 const store = require('./store')
 
 css('tachyons-spacing')
+css('tachyons-box-sizing')
 
 app.use(expose())
 app.use(log())
