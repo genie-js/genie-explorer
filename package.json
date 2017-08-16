@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "budo app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:browserify": "browserify app.js -t babelify -p common-shakeify -p browser-pack-flat/plugin -p [ css-extract -o style.css ] > bundle.js",
     "build:minify": "uglifyjs -cmo bundle.js bundle.js && postcss -r style.css",
