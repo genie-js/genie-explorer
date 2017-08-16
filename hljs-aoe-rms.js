@@ -16,9 +16,10 @@ module.exports = (hljs) => {
 
   return {
     keywords: {
-      conditional,
-      command,
-      directive
+      conditional: conditionals,
+      command: commands,
+      directive: directives,
+      attribute: attributes
     },
     contains: [
       hljs.COMMENT(

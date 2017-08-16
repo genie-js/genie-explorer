@@ -3,6 +3,7 @@ const Palette = require('jascpal')
 const SLP = require('genie-slp')
 const Swatch = require('./components/swatch')
 const RmsScript = require('./components/rmsScript')
+const AIScript = require('./components/aiScript')
 
 module.exports = (state, emitter) => {
   state.drs = null
@@ -37,6 +38,9 @@ module.exports = (state, emitter) => {
         } else if (isRandomMapScript(buffer)) {
           state.fileType = 'rms'
           state.scriptRenderer = new RmsScript()
+        } else if (isAIScript(buffer)) {
+          state.fileType = 'ai'
+          state.scriptRenderer = new AIScript()
         }
       } else if (file.type === 'slp ') {
         state.fileType = 'slp'
@@ -65,5 +69,18 @@ function isRandomMapScript (buffer) {
   if (buffer.indexOf('#const ') !== -1) {
     return true
   }
-  return
+  return false
+}
+
+function isAIScript (buffer) {
+  if (buffer.indexOf('(defrule') !== -1) {
+    return true
+  }
+  if (buffer.indexOf('(defconst') !== -1) {
+    return true
+  }
+  if (buffer.indexOf('#load-if-defined') !== -1) {
+    return true
+  }
+  return false
 }

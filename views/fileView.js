@@ -13,7 +13,8 @@ module.exports = function fileView (state, emit) {
   if (type === 'wav') {
     view = wavView(state, emit)
   }
-  if (type === 'rms') {
+  // TODO separate these two if/when they get different functionality
+  if (type === 'rms' || type === 'ai') {
     view = rmsView(state, emit)
   }
 
