@@ -27,7 +27,7 @@ module.exports = function drsView (state, emit) {
           ${files.map((file) => FileView(file, emit))}
         </ul>
       </div>
-      <div class="viewer vh-100 pa2">
+      <div class="viewer vh-100">
         ${state.viewing ? viewer(state, emit) : null}
       </div>
     </div>
