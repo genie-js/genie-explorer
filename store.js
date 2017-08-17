@@ -3,11 +3,6 @@ const fs = require('fs')
 const DRS = require('genie-drs')
 const Palette = require('jascpal')
 const SLP = require('genie-slp')
-const FileList = require('./components/fileList')
-const Swatch = require('./components/swatch')
-const RmsScript = require('./components/rmsScript')
-const AIScript = require('./components/aiScript')
-const SLPFrameRenderer = require('./components/slpFrameViewer')
 
 const defaultPalette = fs.readFileSync(path.join(__dirname, './default-palette.pal'), 'utf8')
 
@@ -15,7 +10,6 @@ module.exports = (state, emitter) => {
   state.drs = null
   state.viewing = null
   state.palette = Palette(defaultPalette)
-  state.fileList = new FileList()
 
   emitter.on('drsFile', (drs) => {
     state.drs = DRS(drs)
@@ -44,7 +38,6 @@ module.exports = (state, emitter) => {
     state.fileBuffer = null
     state.fileType = null
     state.fileData = null
-    state.swatch = null
 
     state.drs.readFile(id, (err, buffer) => {
       if (state.viewing !== file) return
@@ -54,20 +47,16 @@ module.exports = (state, emitter) => {
         if (isPalette(buffer)) {
           state.fileType = 'palette'
           state.fileData = Palette(buffer)
-          state.swatch = new Swatch()
         } else if (isRandomMapScript(buffer)) {
           state.fileType = 'rms'
-          state.scriptRenderer = new RmsScript()
         } else if (isAIScript(buffer)) {
           state.fileType = 'ai'
-          state.scriptRenderer = new AIScript()
         }
       } else if (file.type === 'slp ') {
         state.fileType = 'slp'
         state.fileData = SLP(buffer)
         state.fileData.parseHeader()
         state.currentSlpFrame = 0
-        state.slpFrameRenderer = new SLPFrameRenderer()
       } else if (file.type === 'wav ') {
         state.fileType = 'wav'
         const blob = new Blob([ buffer.buffer ], { type: 'audio/wav' })

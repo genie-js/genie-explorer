@@ -1,8 +1,10 @@
 const html = require('choo/html')
+const SLPFrameRenderer = require('../components/slpFrameViewer')
+
+const frameRenderer = new SLPFrameRenderer()
 
 module.exports = function slpView (state, emit) {
   const slp = state.fileData
-  const renderer = state.slpFrameRenderer
   const frames = slp.frames
   const frameId = state.currentSlpFrame
 
@@ -12,7 +14,7 @@ module.exports = function slpView (state, emit) {
         ${frames.map((frame, index) => FrameItem(frame, index, emit))}
       </ul>
       <div>
-        ${renderer.render({
+        ${frameRenderer.render({
           slp,
           frameId,
           palette: state.palette

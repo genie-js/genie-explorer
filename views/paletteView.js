@@ -1,4 +1,7 @@
 const html = require('choo/html')
+const Swatch = require('../components/swatch')
+
+const swatch = new Swatch()
 
 module.exports = function paletteView (state, emit) {
   const palette = state.fileData
@@ -10,7 +13,7 @@ module.exports = function paletteView (state, emit) {
       <div class="flex justify-between">
         <code><pre>${text}</pre></code>
         <div style="justify-self: flex-end">
-          ${state.swatch.render(palette)}
+          ${swatch.render(palette)}
         </div>
       </div>
     </div>

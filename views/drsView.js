@@ -1,5 +1,6 @@
 const html = require('choo/html')
 const css = require('sheetify')
+const FileList = require('../components/fileList')
 const viewer = require('./fileView')
 
 const prefix = css`
@@ -11,13 +12,15 @@ const prefix = css`
   }
 `
 
+const fileList = new FileList()
+
 module.exports = function drsView (state, emit) {
   const files = state.drs.getFiles()
   return html`
     <div class="${prefix}">
       <div class="file-list fl vh-100 pa2 w5">
         <input type="file" onchange=${onchange} class="w-100" />
-        ${state.fileList.render({ files, emit })}
+        ${fileList.render({ files, emit })}
       </div>
       <div class="viewer vh-100">
         ${state.viewing ? viewer(state, emit) : empty()}

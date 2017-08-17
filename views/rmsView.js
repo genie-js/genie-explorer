@@ -1,9 +1,9 @@
 const html = require('choo/html')
 
-module.exports = function rmsView (state, emit) {
+module.exports = function rmsView (scriptRenderer, state, emit) {
   return html`
     <div>
-      ${state.scriptRenderer.render(state.fileBuffer.toString('utf8'))}
+      ${scriptRenderer.render(state.fileBuffer.toString('utf8'))}
     </div>
   `
 }
