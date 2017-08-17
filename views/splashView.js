@@ -3,7 +3,7 @@ const html = require('choo/html')
 module.exports = function splashView (state, emit) {
   return html`
     <div class="flex justify-center items-center vw-100 vh-100">
-      <div>
+      <div class="pa4 bg-light-gray">
         <p>Select a file</p>
         <input type="file" onchange=${onchange}>
       </div>

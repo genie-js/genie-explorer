@@ -22,7 +22,7 @@ module.exports = function drsView (state, emit) {
         </ul>
       </div>
       <div class="viewer vh-100">
-        ${state.viewing ? viewer(state, emit) : null}
+        ${state.viewing ? viewer(state, emit) : empty()}
       </div>
     </div>
   `
@@ -39,4 +39,12 @@ function FileView (file, emit) {
   function onclick () {
     emit('view', file.id)
   }
+}
+
+function empty () {
+  return html`
+    <p class="pa2 ma0">
+      Select a file to the left
+    </p>
+  `
 }
