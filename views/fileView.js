@@ -2,6 +2,7 @@ const html = require('choo/html')
 const paletteView = require('./paletteView')
 const wavView = require('./wavView')
 const rmsView = require('./rmsView')
+const slpView = require('./slpView')
 
 module.exports = function fileView (state, emit) {
   const type = state.fileType
@@ -16,6 +17,9 @@ module.exports = function fileView (state, emit) {
   // TODO separate these two if/when they get different functionality
   if (type === 'rms' || type === 'ai') {
     view = rmsView(state, emit)
+  }
+  if (type === 'slp') {
+    view = slpView(state, emit)
   }
 
   if (!view) {
