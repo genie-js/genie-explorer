@@ -17,6 +17,7 @@ module.exports = function drsView (state, emit) {
   return html`
     <div class="${prefix}">
       <div class="file-list fl vh-100 pa2 w5">
+        <input type="file" onchange=${onchange} class="w-100" />
         <ul class="list pa0">
           ${files.map((file) => FileView(file, emit))}
         </ul>
@@ -26,6 +27,10 @@ module.exports = function drsView (state, emit) {
       </div>
     </div>
   `
+
+  function onchange (event) {
+    emit('drsFile', event.target.files[0])
+  }
 }
 
 function FileView (file, emit) {
