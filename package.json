@@ -7,7 +7,7 @@
     "start": "budo app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:browserify": "browserify app.js -t babelify -p common-shakeify -p browser-pack-flat/plugin -p [ css-extract -o style.css ] > bundle.js",
-    "build:minify": "uglifyjs -cmo bundle.js bundle.js && postcss -r style.css",
+    "build:minify": "purifycss bundle.js style.css --out style.css && uglifyjs -cmo bundle.js bundle.js && postcss -r style.css",
     "build:html": "indexhtmlify --style style.css --title 'genie-explorer' < bundle.js > index.html",
     "build:clean": "rm style.css bundle.js",
     "build": "npm run build:browserify && npm run build:minify && npm run build:html && npm run build:clean"
@@ -47,6 +47,7 @@
     "indexhtmlify": "^1.3.1",
     "postcss-cli": "^4.1.0",
     "postcss-cssnext": "^3.0.2",
+    "purify-css": "^1.2.5",
     "uglify-es": "^3.0.27"
   },
   "dependencies": {
