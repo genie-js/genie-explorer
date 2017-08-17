@@ -1,6 +1,5 @@
 const html = require('choo/html')
 const css = require('sheetify')
-const prettyBytes = require('prettier-bytes')
 const viewer = require('./fileView')
 
 const prefix = css`
@@ -18,9 +17,7 @@ module.exports = function drsView (state, emit) {
     <div class="${prefix}">
       <div class="file-list fl vh-100 pa2 w5">
         <input type="file" onchange=${onchange} class="w-100" />
-        <ul class="list pa0">
-          ${files.map((file) => FileView(file, emit))}
-        </ul>
+        ${state.fileList.render({ files, emit })}
       </div>
       <div class="viewer vh-100">
         ${state.viewing ? viewer(state, emit) : empty()}
@@ -30,19 +27,6 @@ module.exports = function drsView (state, emit) {
 
   function onchange (event) {
     emit('drsFile', event.target.files[0])
-  }
-}
-
-function FileView (file, emit) {
-  return html`
-    <li onclick=${onclick} class="code">
-      ${file.id}.${file.type}
-      <span class="mid-gray fr">${prettyBytes(file.size)}</span>
-    </li>
-  `
-
-  function onclick () {
-    emit('view', file.id)
   }
 }
 

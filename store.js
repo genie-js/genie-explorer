@@ -3,6 +3,7 @@ const fs = require('fs')
 const DRS = require('genie-drs')
 const Palette = require('jascpal')
 const SLP = require('genie-slp')
+const FileList = require('./components/fileList')
 const Swatch = require('./components/swatch')
 const RmsScript = require('./components/rmsScript')
 const AIScript = require('./components/aiScript')
@@ -14,6 +15,7 @@ module.exports = (state, emitter) => {
   state.drs = null
   state.viewing = null
   state.palette = Palette(defaultPalette)
+  state.fileList = new FileList()
 
   emitter.on('drsFile', (drs) => {
     state.drs = DRS(drs)
