@@ -47,8 +47,8 @@ module.exports = (state, emitter) => {
       if (file.type === 'bina') {
         if (isBmp(buffer)) {
           state.fileType = 'bmp'
-        const blob = new Blob([ buffer.buffer ], { type: 'image/bmp' })
-        state.fileData = URL.createObjectURL(blob)
+          const blob = new Blob([ buffer.buffer ], { type: 'image/bmp' })
+          state.fileData = URL.createObjectURL(blob)
         } else if (isPalette(buffer)) {
           state.fileType = 'palette'
           state.fileData = Palette(buffer)
@@ -56,6 +56,8 @@ module.exports = (state, emitter) => {
           state.fileType = 'rms'
         } else if (isAIScript(buffer)) {
           state.fileType = 'ai'
+        } else {
+          state.fileType = 'text'
         }
       } else if (file.type === 'slp ') {
         state.fileType = 'slp'

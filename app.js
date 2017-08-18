@@ -35,7 +35,7 @@ function mainView (state, emit) {
   }
 
   return html`
-    <body class="ma0">
+    <body class="ma0 sans-serif">
       ${view}
     </body>
   `
