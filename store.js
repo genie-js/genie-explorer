@@ -1,5 +1,6 @@
 const path = require('path')
 const fs = require('fs')
+const isBmp = require('is-bmp')
 const DRS = require('genie-drs')
 const Palette = require('jascpal')
 const SLP = require('genie-slp')
@@ -44,7 +45,11 @@ module.exports = (state, emitter) => {
 
       state.fileBuffer = buffer
       if (file.type === 'bina') {
-        if (isPalette(buffer)) {
+        if (isBmp(buffer)) {
+          state.fileType = 'bmp'
+        const blob = new Blob([ buffer.buffer ], { type: 'image/bmp' })
+        state.fileData = URL.createObjectURL(blob)
+        } else if (isPalette(buffer)) {
           state.fileType = 'palette'
           state.fileData = Palette(buffer)
         } else if (isRandomMapScript(buffer)) {

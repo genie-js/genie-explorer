@@ -3,6 +3,7 @@ const AIScript = require('../components/aiScript')
 const RMSScript = require('../components/rmsScript')
 const paletteView = require('./paletteView')
 const wavView = require('./wavView')
+const imageView = require('./imageView')
 const rmsView = require('./rmsView')
 const slpView = require('./slpView')
 
@@ -15,6 +16,9 @@ module.exports = function fileView (state, emit) {
 
   if (type === 'palette') {
     view = paletteView(state, emit)
+  }
+  if (type === 'bmp') {
+    view = imageView(state, emit)
   }
   if (type === 'wav') {
     view = wavView(state, emit)
