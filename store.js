@@ -14,6 +14,7 @@ module.exports = (state, emitter) => {
 
   emitter.on('drsFile', (drs) => {
     state.drs = DRS(drs)
+    state.tableStates = Object.create(null)
 
     state.drs.read(() => {
       emitter.emit('render')
@@ -29,6 +30,11 @@ module.exports = (state, emitter) => {
       return
     }
     state.currentSlpFrame = id
+    emitter.emit('render')
+  })
+
+  emitter.on('collapseDrsTable', ({ table, value }) => {
+    state.tableStates[table] = value
     emitter.emit('render')
   })
 

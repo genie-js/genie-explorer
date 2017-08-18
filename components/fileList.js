@@ -1,28 +1,32 @@
 const html = require('choo/html')
+const d = require('defined')
 const prettyBytes = require('prettier-bytes')
 const Nanocomponent = require('nanocomponent')
 
 module.exports = class FileList extends Nanocomponent {
-  createElement ({ files, selected, emit }) {
-    this.files = files
+  createElement ({ drs, tableStates, selected, emit }) {
+    this.files = drs.getFiles()
+    this.tableStates = JSON.stringify(tableStates)
     this.selected = selected
     return html`
-      <ul class="list pa0">
-        ${files.map((file) => FileView({ file, selected: selected === file.id }, emit))}
-      </ul>
+      <div>
+        ${drs.tables.map((table) =>
+          Table({
+            table,
+            selected,
+            isOpen: d(tableStates[table.ext], true)
+          }, emit)
+        )}
+      </div>
     `
   }
 
   getItem (id) {
-    let item = this.element.firstElementChild
-    while (item) {
-      if (item.dataset.id == id) return item
-      item = item.nextElementSibling
-    }
+    return this.element.querySelector(`li[data-id="${id}"]`)
   }
 
-  update ({ files, selected }) {
-    if (!areSameFiles(files, this.files)) {
+  update ({ drs, tableStates, selected }) {
+    if (!areSameFiles(drs.getFiles(), this.files) || JSON.stringify(tableStates) !== this.tableStates) {
       return true
     }
     if (selected !== this.selected) {
@@ -47,7 +51,36 @@ function areSameFiles (a, b) {
   return true
 }
 
-function FileView ({ file, selected }, emit) {
+function Table ({ table, selected, isOpen }, emit) {
+  return html`
+    <div>
+      ${TableHeader(table.ext, isOpen, ontoggle)}
+      ${isOpen ? html`<ul class="list pa0 ma0">
+        ${table.files.map((file) =>
+          FileItem({ file, selected: selected === file.id }, emit)
+        )}
+      </ul>` : null }
+    </div>
+  `
+
+  function ontoggle () {
+    emit('collapseDrsTable', {
+      table: table.ext,
+      value: !isOpen
+    })
+  }
+}
+
+function TableHeader (name, isOpen, onToggle) {
+  return html`
+    <p class="code b ma0 mt3" onclick=${onToggle}>
+      ${isOpen ? '▼' : '▶'}
+      ${name}
+    </p>
+  `
+}
+
+function FileItem ({ file, selected }, emit) {
   return html`
     <li onclick=${onclick} class="code${selected ? ' b' : ''}" data-id="${file.id}">
       ${file.id}.${file.type}
