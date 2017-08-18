@@ -40,6 +40,10 @@ module.exports = (state, emitter) => {
 
   emitter.on('view', (id) => {
     const file = state.drs.getFile(id)
+    if (state.viewing === file) {
+      return
+    }
+
     state.viewing = file
     // Reset
     state.fileBuffer = null
