@@ -1,16 +1,35 @@
 const html = require('choo/html')
+const css = require('sheetify')
 const Nanocomponent = require('nanocomponent')
-const hljs = require('highlight.js/lib/highlight')
-hljs.registerLanguage('rms', require('../hljs-aoe-rms'))
-// Using `lisp` for now because its syntax is similar
-hljs.registerLanguage('ai', require('highlight.js/lib/languages/lisp'))
+const prism = require('prismjs/components/prism-core')
+prism.languages.rms = require('../prism-aoe-rms')
+prism.languages.ai = require('../prism-aoe-ai')
+
+const prefix = css`
+  :host {
+    background: #333;
+    color: white;
+  }
+
+  /* RMS */
+  :host .section { color: #ffa; }
+  :host .number { color: #d36363; }
+  :host .word { color: #ade5fc; }
+  :host .punctuation,
+  :host .command { color: #fc9b9b; }
+  :host .attribute { color: #fff; }
+  :host .define,
+  :host .include,
+  :host .conditional { color: #fcc28c; }
+  :host .comment { color: #888; }
+`
 
 function hasLanguage (language) {
-  return language && !!hljs.getLanguage(language)
+  return language && typeof prism.languages[language] === 'object'
 }
 
 function highlight (language, src) {
-  return hljs.highlight(language, src).value
+  return prism.highlight(src, prism.languages[language], language)
 }
 
 module.exports = class ScriptRenderer extends Nanocomponent {
@@ -22,7 +41,7 @@ module.exports = class ScriptRenderer extends Nanocomponent {
     } else {
       this.code.textContent = source
     }
-    return html`<pre class="hljs pa2 ma0">${this.code}</pre>`
+    return html`<pre class="${prefix} pa2 ma0">${this.code}</pre>`
   }
 
   update ({ source, language }) {
