@@ -11,7 +11,8 @@
     "build:minify": "purifycss build/bundle.js build/style.css --out build/style.css && uglifyjs -cmo build/bundle.js build/bundle.js && postcss -r build/style.css",
     "build:html": "indexhtmlify --style build/style.css --title 'genie-explorer' < build/bundle.js > build/index.html",
     "build:clean": "rimraf build/style.css build/bundle.js",
-    "build": "npm run build:dir && npm run build:browserify && npm run build:minify && npm run build:html && npm run build:clean"
+    "build": "npm run build:dir && npm run build:browserify && npm run build:minify && npm run build:html && npm run build:clean",
+    "deploy": "npm run build && surge -d genie-explorer.surge.sh build"
   },
   "browserify": {
     "transform": [
