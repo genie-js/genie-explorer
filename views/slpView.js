@@ -10,7 +10,7 @@ module.exports = function slpView (state, emit) {
 
   return html`
     <div>
-      <table class="bg-light-gray w-100">
+      <table class="bg-light-gray w-100 ph2">
         <tbody>
           <tr>
             <th class="tl w4">Player:</th>
@@ -60,23 +60,19 @@ function FrameSlider ({ current, frames, onchange }) {
     `)
   }
   return html`
-    <div>
-      <p class="mv0 tc">
-        <select onchange=${onselect}>
-          ${frameOptions}
-        </select>
-      </p>
-      <p class="mv0 flex">
-        <span>#0</span>
-        <input
-          type="range"
-          min="0"
-          max=${frames.length - 1}
-          value=${current}
-          style="flex-basis: ${frames.length * 10}px; flex-grow: 2"
-          oninput=${onrange} />
-        <span>#${frames.length - 1}</span>
-      </p>
+    <div class="mv0 flex content-start items-center">
+      <select onchange=${onselect} class="mr2">
+        ${frameOptions}
+      </select>
+      <span>#0</span>
+      <input
+        type="range"
+        min="0"
+        max=${frames.length - 1}
+        value=${current}
+        style="flex-grow: 2"
+        oninput=${onrange} />
+      <span>#${frames.length - 1}</span>
     </div>
   `
 
