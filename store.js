@@ -11,6 +11,7 @@ module.exports = (state, emitter) => {
   state.drs = null
   state.viewing = null
   state.palette = Palette(defaultPalette)
+  state.slpPlayer = 1
 
   emitter.on('drsFile', (drs) => {
     state.drs = DRS(drs)
@@ -30,6 +31,10 @@ module.exports = (state, emitter) => {
       return
     }
     state.currentSlpFrame = id
+    emitter.emit('render')
+  })
+  emitter.on('slpPlayer', (player) => {
+    state.slpPlayer = player
     emitter.emit('render')
   })
 
