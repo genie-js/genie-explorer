@@ -9,19 +9,31 @@ module.exports = function slpView (state, emit) {
   const frameId = state.currentSlpFrame
 
   return html`
-    <div class="pa2">
-      <div>
-        ${PlayerSelect({
-          current: state.slpPlayer,
-          onchange: onplayerchange
-        })}
-        ${FrameSlider({
-          current: frameId,
-          frames: frames,
-          onchange: onframechange
-        })}
-      </div>
-      <div>
+    <div>
+      <table class="bg-light-gray w-100">
+        <tbody>
+          <tr>
+            <th class="tl w4">Player:</th>
+            <td>
+              ${PlayerSelect({
+                current: state.slpPlayer,
+                onchange: onplayerchange
+              })}
+            </td>
+          </tr>
+          <tr>
+            <th class="tl w4">Frame:</th>
+            <td>
+              ${FrameSlider({
+                current: frameId,
+                frames: frames,
+                onchange: onframechange
+              })}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="pa2">
         ${frameRenderer.render({
           slp,
           frameId,
