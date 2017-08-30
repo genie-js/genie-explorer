@@ -15,9 +15,11 @@ module.exports = function slpView (state, emit) {
           current: state.slpPlayer,
           onchange: onplayerchange
         })}
-        <ul class="list pa0 fl">
-          ${frames.map((frame, index) => FrameItem(frame, index, emit))}
-        </ul>
+        ${FrameSlider({
+          current: frameId,
+          frames: frames,
+          onchange: onframechange
+        })}
       </div>
       <div>
         ${frameRenderer.render({
@@ -32,6 +34,45 @@ module.exports = function slpView (state, emit) {
 
   function onplayerchange (player) {
     emit('slpPlayer', player)
+  }
+  function onframechange (index) {
+    emit('slpFrame', index)
+  }
+}
+
+function FrameSlider ({ current, frames, onchange }) {
+  const frameOptions = []
+  for (let i = 0; i < frames.length; i++) {
+    frameOptions.push(html`
+      <option selected=${current === i}>#${i}</option>
+    `)
+  }
+  return html`
+    <div>
+      <p class="mv0 tc">
+        <select onchange=${onselect}>
+          ${frameOptions}
+        </select>
+      </p>
+      <p class="mv0 flex">
+        <span>#0</span>
+        <input
+          type="range"
+          min="0"
+          max=${frames.length - 1}
+          value=${current}
+          style="flex-basis: ${frames.length * 10}px; flex-grow: 2"
+          oninput=${onrange} />
+        <span>#${frames.length - 1}</span>
+      </p>
+    </div>
+  `
+
+  function onselect (event) {
+    onchange(event.target.selectedIndex)
+  }
+  function onrange (event) {
+    onchange(parseInt(event.target.value, 10))
   }
 }
 
@@ -51,17 +92,5 @@ function PlayerSelect ({ current, onchange }) {
 
   function onplayerchange (event) {
     onchange(event.target.selectedIndex + 1)
-  }
-}
-
-function FrameItem (frame, index, emit) {
-  return html`
-    <li class="fl mh2" onclick=${onclick}>
-      #${index}
-    </li>
-  `
-
-  function onclick () {
-    emit('slpFrame', index)
   }
 }

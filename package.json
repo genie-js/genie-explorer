@@ -78,6 +78,7 @@
     "tachyons-lists": "^2.0.12",
     "tachyons-skins": "^4.1.0",
     "tachyons-spacing": "^6.0.4",
+    "tachyons-text-align": "^3.1.0",
     "tachyons-widths": "^5.2.1",
     "yo-yoify": "^3.7.3"
   }

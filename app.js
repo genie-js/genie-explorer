@@ -18,6 +18,7 @@ css('tachyons-floats')
 css('tachyons-flexbox')
 css('tachyons-widths')
 css('tachyons-heights')
+css('tachyons-text-align')
 
 app.use(expose())
 app.use(log())
