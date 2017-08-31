@@ -10,6 +10,7 @@ const store = require('./store')
 
 css('tachyons-spacing')
 css('tachyons-box-sizing')
+css('tachyons-box-shadow')
 css('tachyons-lists')
 css('tachyons-font-family')
 css('tachyons-font-weight')

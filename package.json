@@ -69,6 +69,7 @@
     "prettier-bytes": "^1.0.4",
     "prismjs": "^1.6.0",
     "sheetify": "^6.1.1",
+    "tachyons-box-shadow": "^2.0.4",
     "tachyons-box-sizing": "^3.2.1",
     "tachyons-flexbox": "^2.0.5",
     "tachyons-floats": "^3.0.4",
