@@ -33,13 +33,15 @@ module.exports = function slpView (state, emit) {
           </tr>
         </tbody>
       </table>
-      <div class="pa2">
-        ${frameRenderer.render({
-          slp,
-          frameId,
-          palette: state.palette,
-          player: state.slpPlayer
-        })}
+      <div class="flex justify-start items-start">
+        <div class="bg-white pa3 ma2 shadow-2">
+          ${frameRenderer.render({
+            slp,
+            frameId,
+            palette: state.palette,
+            player: state.slpPlayer
+          })}
+        </div>
       </div>
     </div>
   `

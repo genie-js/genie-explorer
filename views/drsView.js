@@ -27,7 +27,7 @@ module.exports = function drsView (state, emit) {
           emit
         })}
       </div>
-      <div class="viewer vh-100">
+      <div class="viewer vh-100 bg-light-gray">
         ${state.viewing ? viewer(state, emit) : empty()}
       </div>
     </div>
