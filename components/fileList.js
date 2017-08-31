@@ -59,7 +59,7 @@ function Table ({ table, selected, isOpen }, emit) {
         ${table.files.map((file) =>
           FileItem({ file, selected: selected === file.id }, emit)
         )}
-      </ul>` : null }
+      </ul>` : null}
     </div>
   `
 

@@ -2,8 +2,6 @@ const Nanocomponent = require('nanocomponent')
 
 module.exports = class SLPFrameViewer extends Nanocomponent {
   createElement (props) {
-    const { slp, frameId } = props
-    const frame = slp.getFrame(frameId)
     const canvas = document.createElement('canvas')
 
     this.canvas = canvas

@@ -1,3 +1,4 @@
+/* global AudioContext */
 const rafloop = require('raf-loop')
 const Nanocomponent = require('nanocomponent')
 

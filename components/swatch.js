@@ -21,7 +21,6 @@ module.exports = class Swatch extends Nanocomponent {
     const tileSize = 240 / tilesPerRow
     let x = 0
     let y = 0
-    let i = 0
     palette.forEach((color) => {
       if (x >= 240) {
         y += tileSize
