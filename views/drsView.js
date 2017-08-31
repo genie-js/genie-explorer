@@ -19,7 +19,7 @@ module.exports = function drsView (state, emit) {
   return html`
     <div class="${prefix}">
       <div class="file-list fl vh-100 pa2 w5">
-        <input type="file" onchange=${onchange} class="w-100" />
+        <input type="file" accept=".drs" onchange=${onchange} class="w-100" />
         ${fileList.render({
           drs: state.drs,
           tableStates: state.tableStates,
