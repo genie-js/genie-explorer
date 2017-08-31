@@ -4,6 +4,7 @@ const Frequency = require('../components/frequency')
 const visualizer = new Frequency()
 
 module.exports = function wavView (state, emit) {
+  state.fileData.controls = true
   state.fileData.className = 'w-100'
   return html`
     <div class="flex items-center justify-center h-100">

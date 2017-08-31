@@ -83,7 +83,6 @@ module.exports = (state, emitter) => {
         state.fileType = 'wav'
         const blob = new Blob([ buffer.buffer ], { type: 'audio/wav' })
         state.fileData = new Audio(URL.createObjectURL(blob))
-        state.fileData.controls = true
       }
 
       emitter.emit('render')
