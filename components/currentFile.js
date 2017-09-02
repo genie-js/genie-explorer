@@ -19,7 +19,7 @@ module.exports = class CurrentFile extends Nanocomponent {
     return html`
       <p class="b code mt0 flex justify-between items-center">
         ${file.name}
-        <button class="fr" onclick=${onedit}>✏️</button>
+        <button class="bg-dark-pink white br2 bn pv1 ph3 pointer" onclick=${onedit}>✏️</button>
       </p>
     `
 
