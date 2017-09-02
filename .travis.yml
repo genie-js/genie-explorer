@@ -3,8 +3,6 @@ sudo: false
 node_js:
   - 8
 
-script:
-  - npm run build
 after_success:
   - npm install --global surge
   - if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ] ; then npm run deploy ; fi

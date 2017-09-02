@@ -9,7 +9,7 @@ module.exports = {
   },
   number: /[-+]?\d+\b/,
   operator: {
-    pattern: /(\()(?:[-+*%\/]|[<>]=?|=>?)/,
+    pattern: /(\()(?:[-+*%/]|[<>]=?|=>?)/,
     lookbehind: true
   },
   word: {

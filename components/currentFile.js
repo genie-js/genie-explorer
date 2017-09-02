@@ -26,12 +26,13 @@ module.exports = class CurrentFile extends Nanocomponent {
     function onedit () {
       self.editing = true
       self.render(self.props)
-      if (self.input) self.input.click()
+      const input = self.element.querySelector('input')
+      if (input) input.click()
     }
   }
   createInput ({ onselect }) {
     const self = this
-    return this.input = html`
+    return html`
       <input type="file" accept=".drs" onchange=${onchange} class="w-100" />
     `
 
@@ -42,5 +43,3 @@ module.exports = class CurrentFile extends Nanocomponent {
   }
   update () { return true }
 }
-
-

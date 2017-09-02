@@ -57,6 +57,7 @@ module.exports = (state, emitter) => {
     state.fileData = null
 
     state.drs.readFile(id, (err, buffer) => {
+      if (err) throw err
       if (state.viewing !== file) return
 
       state.fileBuffer = buffer

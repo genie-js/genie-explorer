@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "budo app.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "standard --env browser",
     "build:dir": "rimraf build && mkdirp build",
     "build:browserify": "browserify app.js -t babelify -p common-shakeify -p browser-pack-flat/plugin -p [ css-extract -o build/style.css ] > build/bundle.js",
     "build:minify": "purifycss build/bundle.js build/style.css --out build/style.css && uglifyjs -cmo build/bundle.js build/bundle.js && postcss -r build/style.css",
@@ -52,6 +52,7 @@
     "postcss-cssnext": "^3.0.2",
     "purify-css": "^1.2.6",
     "rimraf": "^2.6.1",
+    "standard": "^10.0.3",
     "uglify-es": "^3.0.28"
   },
   "dependencies": {
