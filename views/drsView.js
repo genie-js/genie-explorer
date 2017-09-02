@@ -1,6 +1,7 @@
 const html = require('choo/html')
 const css = require('sheetify')
 const FileList = require('../components/fileList')
+const CurrentFile = require('../components/currentFile')
 const viewer = require('./fileView')
 
 const prefix = css`
@@ -13,12 +14,16 @@ const prefix = css`
 `
 
 const fileList = new FileList()
+const currentFile = new CurrentFile()
 
 module.exports = function drsView (state, emit) {
   return html`
     <div class="${prefix}">
       <div class="file-list fl vh-100 pa2 w5">
-        <input type="file" accept=".drs" onchange=${onchange} class="w-100" />
+        ${currentFile.render({
+          onselect: onchange,
+          file: state.file
+        })}
         ${fileList.render({
           drs: state.drs,
           tableStates: state.tableStates,
@@ -32,8 +37,8 @@ module.exports = function drsView (state, emit) {
     </div>
   `
 
-  function onchange (event) {
-    emit('drsFile', event.target.files[0])
+  function onchange (file) {
+    emit('drsFile', file)
   }
 }
 

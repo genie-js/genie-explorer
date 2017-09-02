@@ -14,6 +14,7 @@ module.exports = (state, emitter) => {
   state.slpPlayer = 1
 
   emitter.on('drsFile', (drs) => {
+    state.file = drs
     state.drs = DRS(drs)
     state.tableStates = Object.create(null)
 
