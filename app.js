@@ -1,8 +1,6 @@
 const html = require('choo/html')
 const css = require('sheetify')
 const app = require('choo')()
-const expose = require('choo-expose')
-const devtools = require('choo-devtools')
 const splashView = require('./views/splashView')
 const drsView = require('./views/drsView')
 const store = require('./store')
@@ -23,8 +21,10 @@ css('tachyons-spacing')
 css('tachyons-text-align')
 css('tachyons-widths')
 
-app.use(expose())
-app.use(devtools())
+if (process.env.NODE_ENV !== 'production') {
+  app.use(require('choo-devtools')())
+}
+
 app.use(store)
 
 app.route('/', mainView)
