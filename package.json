@@ -7,17 +7,16 @@
     "start": "budo app.js",
     "test": "standard --env browser",
     "build:dir": "rimraf build && mkdirp build",
-    "build:browserify": "browserify app.js -t babelify -p common-shakeify -p browser-pack-flat/plugin -p [ css-extract -o build/style.css ] > build/bundle.js",
-    "build:minify": "purifycss build/bundle.js build/style.css --out build/style.css && uglifyjs -cmo build/bundle.js build/bundle.js && postcss -r build/style.css",
+    "build:browserify": "browserify app.js -t babelify -p tinyify -p [ css-extract -o build/style.css ] > build/bundle.js",
+    "build:css": "purifycss build/bundle.js build/style.css --out build/style.css && postcss -r build/style.css",
     "build:html": "indexhtmlify --style build/style.css --title 'genie-explorer' < build/bundle.js > build/index.html",
     "build:clean": "rimraf build/style.css build/bundle.js",
-    "build": "npm run build:dir && npm run build:browserify && npm run build:minify && npm run build:html && npm run build:clean",
+    "build": "npm run build:dir && npm run build:browserify && npm run build:css && npm run build:html && npm run build:clean",
     "deploy": "npm run build && surge -d genie-explorer.surge.sh build"
   },
   "browserify": {
     "transform": [
-      "brfs",
-      "sheetify/transform"
+      "babelify"
     ]
   },
   "babel": {
@@ -40,10 +39,8 @@
     "babel-plugin-yo-yoify": "^0.7.0",
     "babelify": "^7.3.0",
     "brfs": "^1.4.3",
-    "browser-pack-flat": "^2.5.0",
     "browserify": "^14.4.0",
     "budo": "^10.0.4",
-    "common-shakeify": "^0.1.0",
     "css-extract": "^1.2.0",
     "cssnano": "^3.10.0",
     "indexhtmlify": "^1.3.1",
@@ -53,7 +50,7 @@
     "purify-css": "^1.2.6",
     "rimraf": "^2.6.1",
     "standard": "^10.0.3",
-    "uglify-es": "^3.0.28"
+    "tinyify": "^1.0.0"
   },
   "dependencies": {
     "choo": "^6.0.0",
