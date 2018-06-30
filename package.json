@@ -7,7 +7,7 @@
     "start": "budo app.js",
     "test": "standard --env browser",
     "build:dir": "rimraf build && mkdirp build",
-    "build:browserify": "browserify app.js -t babelify -p tinyify -p [ css-extract -o build/style.css ] > build/bundle.js",
+    "build:browserify": "browserify app.js -p tinyify -p [ css-extract -o build/style.css ] > build/bundle.js",
     "build:css": "purifycss build/bundle.js build/style.css --out build/style.css && postcss -r build/style.css",
     "build:html": "indexhtmlify --style build/style.css --title 'genie-explorer' < build/bundle.js > build/index.html",
     "build:clean": "rimraf build/style.css build/bundle.js",
@@ -16,18 +16,9 @@
   },
   "browserify": {
     "transform": [
+      "choo/html",
       "brfs",
       "sheetify"
-    ]
-  },
-  "babel": {
-    "plugins": [
-      [
-        "yo-yoify",
-        {
-          "appendChildModule": "bel/appendChild"
-        }
-      ]
     ]
   },
   "repository": {
@@ -42,43 +33,39 @@
   },
   "homepage": "https://github.com/goto-bus-stop/genie-explorer#readme",
   "devDependencies": {
-    "babel-plugin-yo-yoify": "^1.0.1",
-    "babelify": "^7.3.0",
-    "brfs": "^1.4.3",
-    "browserify": "^14.5.0",
-    "budo": "^10.0.4",
-    "css-extract": "^1.2.0",
+    "brfs": "^2.0.0",
+    "browserify": "^16.2.2",
+    "budo": "^11.3.2",
+    "css-extract": "^1.3.0",
     "cssnano": "^3.10.0",
     "indexhtmlify": "^1.3.1",
     "mkdirp": "^0.5.1",
-    "postcss-cli": "^4.1.1",
-    "postcss-cssnext": "^3.0.2",
+    "postcss-cli": "^5.0.1",
+    "postcss-cssnext": "^3.1.0",
     "purify-css": "^1.2.6",
     "rimraf": "^2.6.2",
-    "standard": "^10.0.3",
-    "tinyify": "^2.2.0",
-    "yo-yoify": "^4.0.0"
+    "sheetify": "^7.3.3",
+    "standard": "^11.0.1",
+    "tinyify": "^2.4.3"
   },
   "dependencies": {
-    "choo": "^6.5.0",
-    "choo-devtools": "^2.0.0",
+    "choo": "^6.12.1",
+    "choo-devtools": "^2.5.1",
     "defined": "^1.0.0",
-    "frequency-viewer": "^0.1.0",
-    "genie-drs": "^3.1.0",
-    "genie-slp": "^1.0.0",
-    "is-bmp": "^1.0.0",
+    "genie-drs": "^3.2.0",
+    "genie-slp": "^1.1.0",
+    "is-bmp": "^1.0.1",
     "jascpal": "^0.1.4",
-    "nanocomponent": "^6.4.2",
-    "on-load": "^3.3.1",
+    "nanocomponent": "^6.5.2",
+    "on-load": "^3.4.1",
     "prettier-bytes": "^1.0.4",
-    "prismjs": "^1.8.3",
+    "prismjs": "^1.15.0",
     "raf-loop": "^1.1.3",
-    "sheetify": "^6.2.0",
     "tachyons-border-radius": "^5.1.3",
     "tachyons-borders": "^3.0.4",
     "tachyons-box-shadow": "^2.0.4",
-    "tachyons-box-sizing": "^3.2.1",
-    "tachyons-flexbox": "^2.0.5",
+    "tachyons-box-sizing": "^3.2.2",
+    "tachyons-flexbox": "^2.1.0",
     "tachyons-floats": "^3.0.4",
     "tachyons-font-family": "^4.3.3",
     "tachyons-font-weight": "^5.0.4",
