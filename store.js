@@ -11,6 +11,7 @@ module.exports = (state, emitter) => {
   state.drs = null
   state.viewing = null
   state.palette = Palette(defaultPalette)
+  state.palette.id = 50500
   state.slpPlayer = 1
 
   emitter.on('drsFile', (drs) => {
@@ -55,6 +56,7 @@ module.exports = (state, emitter) => {
     state.fileBuffer = null
     state.fileType = null
     state.fileData = null
+    state.fileURL = null
 
     state.drs.readFile(id, (err, buffer) => {
       if (err) throw err
@@ -66,9 +68,11 @@ module.exports = (state, emitter) => {
           state.fileType = 'bmp'
           const blob = new Blob([ buffer.buffer ], { type: 'image/bmp' })
           state.fileData = URL.createObjectURL(blob)
+          state.fileURL = state.fileData
         } else if (isPalette(buffer)) {
           state.fileType = 'palette'
           state.fileData = Palette(buffer)
+          state.fileData.id = id
         } else if (isRandomMapScript(buffer)) {
           state.fileType = 'rms'
         } else if (isAIScript(buffer)) {
@@ -76,19 +80,44 @@ module.exports = (state, emitter) => {
         } else {
           state.fileType = 'text'
         }
+
+        if (state.fileType !== 'bmp') {
+          const blob = new Blob([ buffer.buffer ], { type: 'text/plain' })
+          state.fileURL = URL.createObjectURL(blob)
+        }
       } else if (file.type === 'slp ') {
         state.fileType = 'slp'
+        const blob = new Blob([ buffer.buffer ], { type: 'application/octet-stream' })
+        state.fileURL = URL.createObjectURL(blob)
         state.fileData = SLP(buffer)
         state.fileData.parseHeader()
         state.currentSlpFrame = 0
       } else if (file.type === 'wav ') {
         state.fileType = 'wav'
         const blob = new Blob([ buffer.buffer ], { type: 'audio/wav' })
-        state.fileData = new Audio(URL.createObjectURL(blob))
+        state.fileURL = URL.createObjectURL(blob)
+        state.fileData = new Audio(state.fileURL)
       }
 
       emitter.emit('render')
     })
+
+    emitter.emit('render')
+  })
+
+  emitter.on('viewPalette', (palette) => {
+    const source = palette.toString()
+    state.viewing = {
+      id: palette.id,
+      type: 'bina',
+      size: source.length,
+      offset: -1
+    }
+    const blob = new Blob([ source ], { type: 'text/plain' })
+    state.fileURL = URL.createObjectURL(blob)
+    state.fileType = 'palette'
+    state.fileBuffer = Buffer.from(source, 'ascii')
+    state.fileData = palette
 
     emitter.emit('render')
   })
