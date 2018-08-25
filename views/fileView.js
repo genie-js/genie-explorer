@@ -54,14 +54,10 @@ function fileWrapper (state, emit, view) {
   `
 }
 
-function activePalette (state, emit) {
+function activePalette (state) {
   return html`
     <span class="mr2">
-      palette: <a href="#" onclick=${onclick}>${state.palette.id}</a>
+      palette: <a href="#palette">${state.palette.id}</a>
     </span>
   `
-
-  function onclick () {
-    emit('viewPalette', state.palette)
-  }
 }

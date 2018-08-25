@@ -14,6 +14,26 @@ module.exports = (state, emitter) => {
   state.palette.id = 50500
   state.slpPlayer = 1
 
+  emitter.on('pushState', (route) => {
+    window.location.hash = route
+  })
+  window.addEventListener('hashchange', (event) => {
+    if (/#palette$/.test(event.newURL)) {
+      return emitter.emit('viewPalette', state.palette)
+    }
+
+    const match = /#([a-z]+)\/(\d+)$/.exec(event.newURL)
+    if (match) {
+      return emitter.emit('view', parseInt(match[2], 10))
+    }
+
+    state.viewing = null
+    state.fileBuffer = null
+    state.fileType = null
+    state.fileData = null
+    state.fileURL = null
+  })
+
   emitter.on('drsFile', (drs) => {
     state.file = drs
     state.drs = DRS(drs)

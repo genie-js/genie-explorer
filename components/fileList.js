@@ -82,13 +82,11 @@ function TableHeader (name, isOpen, onToggle) {
 
 function FileItem ({ file, selected }, emit) {
   return html`
-    <li onclick=${onclick} class="code${selected ? ' b' : ''}" data-id="${file.id}">
-      ${file.id}.${file.type}
-      <span class="mid-gray fr">${prettyBytes(file.size)}</span>
+    <li class="code${selected ? ' b' : ''}" data-id="${file.id}">
+      <a href="#${file.type.trim()}/${file.id}" class="link black">
+        ${file.id}.${file.type}
+        <span class="mid-gray fr">${prettyBytes(file.size)}</span>
+      </a>
     </li>
   `
-
-  function onclick () {
-    emit('view', file.id)
-  }
 }
