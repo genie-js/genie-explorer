@@ -1,4 +1,4 @@
-const html = require('choo/html')
+const html = require('nanohtml')
 const Nanocomponent = require('nanocomponent')
 
 module.exports = class CurrentFile extends Nanocomponent {

@@ -1,4 +1,4 @@
-const html = require('choo/html')
+const html = require('nanohtml')
 const SLPFrameRenderer = require('../components/slpFrameViewer')
 
 const frameRenderer = new SLPFrameRenderer()

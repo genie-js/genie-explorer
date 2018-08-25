@@ -16,7 +16,7 @@
   },
   "browserify": {
     "transform": [
-      "choo/html",
+      "nanohtml",
       "brfs",
       "sheetify"
     ]
@@ -49,14 +49,15 @@
     "tinyify": "^2.4.3"
   },
   "dependencies": {
-    "choo": "^6.13.0",
     "choo-devtools": "^2.5.1",
     "defined": "^1.0.0",
     "genie-drs": "^3.2.0",
     "genie-slp": "^1.1.0",
     "is-bmp": "^1.0.1",
     "jascpal": "^0.1.4",
+    "nanochoo": "^6.8.0",
     "nanocomponent": "^6.5.2",
+    "nanohtml": "^1.2.4",
     "on-load": "^4.0.1",
     "prettier-bytes": "^1.0.4",
     "prismjs": "^1.15.0",

@@ -1,4 +1,4 @@
-const html = require('choo/html')
+const html = require('nanohtml')
 const ScriptRenderer = require('../components/script')
 
 const renderer = new ScriptRenderer()

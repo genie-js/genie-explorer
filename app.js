@@ -1,6 +1,6 @@
-const html = require('choo/html')
+const html = require('nanohtml')
 const css = require('sheetify')
-const app = require('choo')()
+const app = require('nanochoo')()
 const splashView = require('./views/splashView')
 const drsView = require('./views/drsView')
 const store = require('./store')
@@ -28,8 +28,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 app.use(store)
 
-app.route('/', mainView)
-
+app.view(mainView)
 function mainView (state, emit) {
   let view
   if (state.drs) {

@@ -1,4 +1,4 @@
-const html = require('choo/html')
+const html = require('nanohtml')
 const css = require('sheetify')
 const Nanocomponent = require('nanocomponent')
 const prism = require('prismjs/components/prism-core')

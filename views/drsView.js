@@ -1,4 +1,4 @@
-const html = require('choo/html')
+const html = require('nanohtml')
 const css = require('sheetify')
 const FileList = require('../components/fileList')
 const CurrentFile = require('../components/currentFile')

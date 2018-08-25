@@ -1,4 +1,4 @@
-const html = require('choo/html')
+const html = require('nanohtml')
 const d = require('defined')
 const prettyBytes = require('prettier-bytes')
 const Nanocomponent = require('nanocomponent')

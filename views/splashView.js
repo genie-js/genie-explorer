@@ -1,4 +1,4 @@
-const html = require('choo/html')
+const html = require('nanohtml')
 
 module.exports = function splashView (state, emit) {
   return html`

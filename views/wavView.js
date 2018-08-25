@@ -1,4 +1,4 @@
-const html = require('choo/html')
+const html = require('nanohtml')
 const Frequency = require('../components/frequency')
 
 const visualizer = new Frequency()

@@ -1,4 +1,4 @@
-const html = require('choo/html')
+const html = require('nanohtml')
 const Swatch = require('../components/swatch')
 
 const swatch = new Swatch()
