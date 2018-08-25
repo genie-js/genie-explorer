@@ -46,6 +46,7 @@ module.exports = (state, emitter) => {
 
   emitter.on('usePalette', (palette) => {
     state.palette = palette
+    emitter.emit('render')
   })
 
   emitter.on('slpFrame', (id) => {
