@@ -10,7 +10,7 @@ It's compiled to a single `index.html` file using `npm run build`.
 
 ## License
 
-[MIT](./LICENSE)
+[GPLv3](./LICENSE.md)
 
 [choo]: https://github.com/choojs
 [genie-drs]: https://github.com/goto-bus-stop/genie-drs
