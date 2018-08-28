@@ -72,7 +72,7 @@ module.exports = class Minimap extends Nanocomponent {
     return false
   }
 
-  getImageData () {
+  getImageData ({ width, height, tiles }) {
     const pixels = new Uint8ClampedArray(width * height * 4)
     for (let y = 0; y < height; y++) {
       for (let x = 0; x < width; x++) {
