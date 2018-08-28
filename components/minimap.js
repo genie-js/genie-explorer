@@ -48,7 +48,7 @@ module.exports = class Minimap extends Nanocomponent {
   createElement (props) {
     this.canvas = document.createElement('canvas')
     this.canvas.width = 400
-    this.canvas.height = 400
+    this.canvas.height = 200
 
     this.update(props)
 
@@ -65,6 +65,7 @@ module.exports = class Minimap extends Nanocomponent {
     const context = this.canvas.getContext('2d')
     context.save()
     context.scale(1, 0.5)
+    context.translate(this.canvas.width / 2, 0)
     context.rotate(45 * Math.PI / 180)
     context.drawImage(temp, 0, 0)
     context.restore()
