@@ -1,11 +1,10 @@
-const path = require('path')
 const fs = require('fs')
 const isBmp = require('is-bmp')
 const DRS = require('genie-drs')
 const Palette = require('jascpal')
 const SLP = require('genie-slp')
 
-const defaultPalette = fs.readFileSync(path.join(__dirname, './default-palette.pal'), 'utf8')
+const defaultPalette = fs.readFileSync(require.resolve('./default-palette.pal'), 'utf8')
 
 module.exports = (state, emitter) => {
   state.drs = null
