@@ -3,6 +3,7 @@ const isBmp = require('is-bmp')
 const DRS = require('genie-drs')
 const Palette = require('jascpal')
 const SLP = require('genie-slp')
+const SCX = require('genie-scx/src/SCX')
 
 const defaultPalette = fs.readFileSync(require.resolve('./default-palette.pal'), 'utf8')
 
@@ -97,6 +98,15 @@ module.exports = (state, emitter) => {
           state.fileType = 'rms'
         } else if (isAIScript(buffer)) {
           state.fileType = 'ai'
+        } else if (isSCX(buffer)) {
+          state.fileType = 'scx'
+          SCX(buffer).parse((err, scx) => {
+            if (err) throw err
+            state.fileData = scx
+            const blob = new Blob([ buffer.buffer ], { type: 'application/octet-stream' })
+            state.fileURL = URL.createObjectURL(blob)
+            emitter.emit('render')
+          })
         } else {
           state.fileType = 'text'
         }
@@ -168,4 +178,12 @@ function isAIScript (buffer) {
     return true
   }
   return false
+}
+
+function isSCX (buffer) {
+  const version = buffer.toString('ascii', 0, 8)
+  const headerLength = buffer.readUInt32LE(4)
+  const instructionsLength = buffer.readUInt32LE(16)
+  return isFinite(parseFloat(version)) &&
+    headerLength === instructionsLength + 20
 }

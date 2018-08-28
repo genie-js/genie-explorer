@@ -52,6 +52,7 @@
     "choo-devtools": "^2.5.1",
     "defined": "^1.0.0",
     "genie-drs": "^3.2.0",
+    "genie-scx": "github:goto-bus-stop/genie-scx",
     "genie-slp": "^1.1.0",
     "is-bmp": "^1.0.1",
     "jascpal": "^0.1.4",

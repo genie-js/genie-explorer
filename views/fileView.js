@@ -4,6 +4,7 @@ const wavView = require('./wavView')
 const imageView = require('./imageView')
 const scriptView = require('./scriptView')
 const slpView = require('./slpView')
+const scxView = require('./scxView')
 
 module.exports = function fileView (state, emit) {
   const type = state.fileType
@@ -22,6 +23,9 @@ module.exports = function fileView (state, emit) {
   }
   if (type === 'slp') {
     return fileWrapper(state, emit, slpView)
+  }
+  if (type === 'scx') {
+    return fileWrapper(state, emit, scxView)
   }
 
   return fileWrapper(state, emit, () => html`
