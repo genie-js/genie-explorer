@@ -1,4 +1,16 @@
 const Nanocomponent = require('nanocomponent')
+const unitColors = require('../unitColors.json')
+
+const playerColors = {
+  1: '#0000ff',
+  2: '#ff0000',
+  3: '#00ff00',
+  4: '#ffff00',
+  5: '#00ffff',
+  6: '#ff00ff',
+  7: '#434343',
+  8: '#ff8201'
+}
 
 const terrainColors = [
   '#339727',
@@ -55,11 +67,11 @@ module.exports = class Minimap extends Nanocomponent {
     return this.canvas
   }
 
-  update ({ width, height, tiles }) {
-    const data = this.getImageData({ width, height, tiles })
+  update ({ map, objects }) {
+    const data = this.getImageData(map, objects)
     const temp = document.createElement('canvas')
-    temp.width = width
-    temp.height = height
+    temp.width = map.width
+    temp.height = map.height
     temp.getContext('2d').putImageData(data, 0, 0)
 
     const context = this.canvas.getContext('2d')
@@ -73,27 +85,44 @@ module.exports = class Minimap extends Nanocomponent {
     return false
   }
 
-  getImageData ({ width, height, tiles }) {
+  getImageData ({ width, height, tiles }, objects) {
     const pixels = new Uint8ClampedArray(width * height * 4)
     for (let y = 0; y < height; y++) {
       for (let x = 0; x < width; x++) {
         const tile = tiles[y][x]
-
-        let color = terrainColors[tile.terrain]
-
-        color = color
-          .match(/^#([0-9A-F]{2})([0-9A-F]{2})([0-9A-F]{2})$/i)
-          .slice(1)
-          .map((c) => parseInt(c, 16))
-
-        const b = (width * y + x) * 4
-        pixels[b + 0] = color[0]
-        pixels[b + 1] = color[1]
-        pixels[b + 2] = color[2]
-        pixels[b + 3] = 0xFF
+        draw(x, y, terrainColors[tile.terrain])
       }
     }
 
+    objects.forEach(({ x, y, type, player }) => {
+      if (player && playerColors[player]) {
+        drawArea(x, y, playerColors[player], 3)
+      } else if (type && unitColors[type]) {
+        drawArea(x, y, unitColors[type], 1)
+      }
+    })
+
     return new ImageData(pixels, width, height)
+
+    function drawArea (x, y, color, pad) {
+      for (let x0 = x - pad; x0 <= x + pad; x0++) {
+        for (let y0 = y - pad; y0 <= y + pad; y0++) {
+          draw(x0, y0, color)
+        }
+      }
+    }
+
+    function draw (x, y, color) {
+      const [r, g, b] = color
+        .match(/^#([0-9A-F]{2})([0-9A-F]{2})([0-9A-F]{2})$/i)
+        .slice(1)
+        .map((c) => parseInt(c, 16))
+
+      const offs = (width * y + x) * 4
+      pixels[offs + 0] = r
+      pixels[offs + 1] = g
+      pixels[offs + 2] = b
+      pixels[offs + 3] = 0xFF
+    }
   }
 }
