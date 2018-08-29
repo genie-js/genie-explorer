@@ -17,7 +17,7 @@ module.exports = function splashView (state, emit) {
         `}
 
         <p>
-          genie-explorer is built on various open source tools, and is itself licensed under the <a href="https:/github.com/goto-bus-stop/genie-explorer/tree/default/LICENSE.md" target="_blank">GPLv3</a>.
+          genie-explorer is built on various open source tools, and is itself licensed under the <a href="https://github.com/goto-bus-stop/genie-explorer/tree/default/LICENSE.md" target="_blank">GPLv3</a>.
           See its Github page: <a href="https://github.com/goto-bus-stop/genie-explorer" target="_blank">goto-bus-stop/genie-explorer</a>.
         </p>
 
