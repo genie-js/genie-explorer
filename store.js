@@ -3,7 +3,7 @@ const isBmp = require('is-bmp')
 const DRS = require('genie-drs')
 const Palette = require('jascpal')
 const SLP = require('genie-slp')
-const SCX = require('genie-scx/src/SCX')
+const SCX = require('genie-scx')
 
 const defaultPalette = fs.readFileSync(require.resolve('./default-palette.pal'), 'utf8')
 
