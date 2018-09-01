@@ -1,8 +1,8 @@
 module.exports = {
   plugins: [
-    require('postcss-cssnext')({
+    require('postcss-preset-env')({
       features: {
-        autoprefixer: false
+        'custom-media-queries': true
       }
     }),
     require('cssnano')()
