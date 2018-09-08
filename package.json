@@ -56,7 +56,7 @@
     "genie-slp": "^1.1.0",
     "is-bmp": "^1.0.1",
     "jascpal": "^0.1.4",
-    "nanochoo": "^6.8.0",
+    "nanochoo": "^6.13.0",
     "nanocomponent": "^6.5.2",
     "nanohtml": "^1.2.4",
     "on-load": "^4.0.1",
