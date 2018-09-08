@@ -8,13 +8,13 @@ before_deploy:
   - npm install --global surge
   - npm run build
 deploy:
-  # - provider: pages
-  #   skip-cleanup: true
-  #   github-token: $GITHUB_TOKEN
-  #   local-dir: _deploy
-  #   on:
-  #     branch: default
-  #     node: stable
+  - provider: pages
+    skip-cleanup: true
+    github-token: $GITHUB_TOKEN
+    local-dir: build
+    on:
+      branch: default
+      node: stable
   - provider: surge
     skip-cleanup: true
     project: build
