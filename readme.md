@@ -1,5 +1,7 @@
 # genie-explorer
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/genie-js/genie-explorer.svg)](https://greenkeeper.io/)
+
 Web application for viewing contents of Genie DRS archives.
 
 [Live version](http://genie-explorer.surge.sh)
