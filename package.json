@@ -22,15 +22,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/goto-bus-stop/genie-explorer.git"
+    "url": "git+https://github.com/genie-js/genie-explorer.git"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/goto-bus-stop/genie-explorer/issues"
+    "url": "https://github.com/genie-js/genie-explorer/issues"
   },
-  "homepage": "https://github.com/goto-bus-stop/genie-explorer#readme",
+  "homepage": "https://github.com/genie-js/genie-explorer#readme",
   "devDependencies": {
     "brfs": "^2.0.1",
     "browserify": "^16.2.3",
