@@ -12,7 +12,7 @@ module.exports = function splashView (state, emit) {
 
         ${location.protocol === 'file:' ? null : html`
           <p>
-            It is a single HTML file, so you can store it on your computer using right-click » "Save this Page" and open the HTML file in your browser to use it offline, or <a href="${location.href}" download="genie-explorer.html">click here</a>.
+            It is a single HTML file, so you can store it on your computer using right-click » "Save this Page" and open the HTML file in your browser to use it offline, or you can <a href="${location.href}" download="genie-explorer.html">click here</a> to download it.
           </p>
         `}
 
