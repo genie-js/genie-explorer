@@ -3,6 +3,7 @@ const paletteView = require('./paletteView')
 const wavView = require('./wavView')
 const imageView = require('./imageView')
 const scriptView = require('./scriptView')
+const interfaceView = require('./interfaceView')
 const slpView = require('./slpView')
 const scxView = require('./scxView')
 
@@ -17,6 +18,9 @@ module.exports = function fileView (state, emit) {
   }
   if (type === 'wav') {
     return fileWrapper(state, emit, wavView)
+  }
+  if (type === 'interface') {
+    return fileWrapper(state, emit, interfaceView)
   }
   if (type === 'rms' || type === 'ai' || type === 'text') {
     return fileWrapper(state, emit, scriptView)

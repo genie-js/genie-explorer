@@ -94,6 +94,8 @@ module.exports = (state, emitter) => {
           state.fileType = 'palette'
           state.fileData = Palette(buffer)
           state.fileData.id = id
+        } else if (isInterfaceDescription(buffer)) {
+          state.fileType = 'interface'
         } else if (isRandomMapScript(buffer)) {
           state.fileType = 'rms'
         } else if (isAIScript(buffer)) {
@@ -155,6 +157,13 @@ module.exports = (state, emitter) => {
 
 function isPalette (buffer) {
   return buffer.toString('ascii', 0, 8) === 'JASC-PAL'
+}
+
+function isInterfaceDescription (buffer) {
+  if (buffer.indexOf('background1_files') !== -1) {
+    return true
+  }
+  return false
 }
 
 function isRandomMapScript (buffer) {
