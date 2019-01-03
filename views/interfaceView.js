@@ -11,9 +11,25 @@ const prefix = css`
     color: white;
     text-decoration: underline;
   }
+
+  .not-found {
+    color: #cf6a6a;
+    text-decoration: underline;
+  }
 `
 
-function format (content) {
+function FileLink (drs, type, id, title) {
+  if (!drs.getFile(id)) {
+    return html`
+      <span title="This ${type} file is not in this DRS archive." class="not-found">${title}</span>
+    `
+  }
+  return html`
+    <a href="#${type}/${id}" title="Jump to ${type} file">${title}</a>
+  `
+}
+
+function format (drs, content) {
   return html`
     <code>${content.split('\n').map(formatLine)}</code>
   `
@@ -24,13 +40,13 @@ function format (content) {
       if (i === 0) return html`<strong>${part}</strong>`
       if (part !== '-1') {
         if (/background\d_file/.test(all[0]) && (i === 6 || i === 8)) {
-          return html`<a href="#slp/${part}" title="Jump to SLP file">${part}</a>`
+          return FileLink(drs, 'slp', parseInt(part,  10), part)
         }
         if (/palette_file|popup_dialog_sin/.test(all[0]) && i === 4) {
-          return html`<a href="#bina/${part}" title="Jump to BINA file">${part}</a>`
+          return FileLink(drs, 'bina', parseInt(part,  10), part)
         }
         if (/button_file/.test(all[0]) && i === 4) {
-          return html`<a href="#slp/${part}" title="Jump to SLP file">${part}</a>`
+          return FileLink(drs, 'slp', parseInt(part,  10), part)
         }
       }
       return document.createTextNode(part)
@@ -40,9 +56,10 @@ function format (content) {
 }
 
 module.exports = function interfaceView (state, emit) {
+  const drs = state.drs
   const content = state.fileBuffer.toString()
 
   return html`
-    <pre class="${prefix} pa2 ma0">${format(content)}</pre>
+    <pre class="${prefix} pa2 ma0">${format(drs, content)}</pre>
   `
 }
