@@ -40,13 +40,13 @@ function format (drs, content) {
       if (i === 0) return html`<strong>${part}</strong>`
       if (part !== '-1') {
         if (/background\d_file/.test(all[0]) && (i === 6 || i === 8)) {
-          return FileLink(drs, 'slp', parseInt(part,  10), part)
+          return FileLink(drs, 'slp', parseInt(part, 10), part)
         }
         if (/palette_file|popup_dialog_sin/.test(all[0]) && i === 4) {
-          return FileLink(drs, 'bina', parseInt(part,  10), part)
+          return FileLink(drs, 'bina', parseInt(part, 10), part)
         }
         if (/button_file/.test(all[0]) && i === 4) {
-          return FileLink(drs, 'slp', parseInt(part,  10), part)
+          return FileLink(drs, 'slp', parseInt(part, 10), part)
         }
       }
       return document.createTextNode(part)
