@@ -2,7 +2,7 @@
 
 Web application for viewing contents of Genie DRS archives.
 
-[Live version](http://genie-explorer.surge.sh)
+[Live version](http://genie-explorer.aoe2.se)
 
 A small [choo][] app using [genie-drs][], [genie-slp][], [genie-scx][] and [jascpal][] to read and show information from DRS files.
 It's still unfinished in places, but works OK!
