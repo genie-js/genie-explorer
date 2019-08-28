@@ -14,6 +14,7 @@ module.exports = class CurrentFile extends Nanocomponent {
       </div>
     `
   }
+
   createName ({ file }) {
     const self = this
     return html`
@@ -30,6 +31,7 @@ module.exports = class CurrentFile extends Nanocomponent {
       if (input) input.click()
     }
   }
+
   createInput ({ onselect }) {
     const self = this
     return html`
@@ -41,5 +43,6 @@ module.exports = class CurrentFile extends Nanocomponent {
       onselect(event.target.files[0])
     }
   }
+
   update () { return true }
 }

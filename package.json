@@ -45,7 +45,7 @@
     "purify-css": "^1.2.6",
     "rimraf": "^2.6.3",
     "sheetify": "^7.4.0",
-    "standard": "^10.0.0",
+    "standard": "^14.0.2",
     "tinyify": "^2.5.1"
   },
   "dependencies": {

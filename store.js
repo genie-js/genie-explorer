@@ -87,7 +87,7 @@ module.exports = (state, emitter) => {
       if (file.type === 'bina') {
         if (isBmp(buffer)) {
           state.fileType = 'bmp'
-          const blob = new Blob([ buffer.buffer ], { type: 'image/bmp' })
+          const blob = new Blob([buffer.buffer], { type: 'image/bmp' })
           state.fileData = URL.createObjectURL(blob)
           state.fileURL = state.fileData
         } else if (isPalette(buffer)) {
@@ -105,7 +105,7 @@ module.exports = (state, emitter) => {
           SCX(buffer).parse((err, scx) => {
             if (err) throw err
             state.fileData = scx
-            const blob = new Blob([ buffer.buffer ], { type: 'application/octet-stream' })
+            const blob = new Blob([buffer.buffer], { type: 'application/octet-stream' })
             state.fileURL = URL.createObjectURL(blob)
             emitter.emit('render')
           })
@@ -114,19 +114,19 @@ module.exports = (state, emitter) => {
         }
 
         if (state.fileType !== 'bmp') {
-          const blob = new Blob([ buffer.buffer ], { type: 'text/plain' })
+          const blob = new Blob([buffer.buffer], { type: 'text/plain' })
           state.fileURL = URL.createObjectURL(blob)
         }
       } else if (file.type === 'slp ') {
         state.fileType = 'slp'
-        const blob = new Blob([ buffer.buffer ], { type: 'application/octet-stream' })
+        const blob = new Blob([buffer.buffer], { type: 'application/octet-stream' })
         state.fileURL = URL.createObjectURL(blob)
         state.fileData = SLP(buffer)
         state.fileData.parseHeader()
         state.currentSlpFrame = 0
       } else if (file.type === 'wav ') {
         state.fileType = 'wav'
-        const blob = new Blob([ buffer.buffer ], { type: 'audio/wav' })
+        const blob = new Blob([buffer.buffer], { type: 'audio/wav' })
         state.fileURL = URL.createObjectURL(blob)
         state.fileData = new Audio(state.fileURL)
       }
@@ -145,7 +145,7 @@ module.exports = (state, emitter) => {
       size: source.length,
       offset: -1
     }
-    const blob = new Blob([ source ], { type: 'text/plain' })
+    const blob = new Blob([source], { type: 'text/plain' })
     state.fileURL = URL.createObjectURL(blob)
     state.fileType = 'palette'
     state.fileBuffer = Buffer.from(source, 'ascii')
